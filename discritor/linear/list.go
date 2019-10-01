@@ -3,8 +3,6 @@ package linear
 import (
 	"fmt"
 	"reflect"
-
-	"github.com/fyniny/datastruct/iface"
 )
 
 type node struct {
@@ -130,12 +128,4 @@ func (l *list) Delete(i int) interface{} {
 
 func (l *list) Length() int {
 	return l.len
-}
-
-func defaultCompareFunc(inode1, inode2 interface{}) int {
-	if comparer, ok := inode1.(iface.Comparer); ok {
-		return comparer.Compare(inode2)
-	}
-
-	panic("Not found compare function")
 }
