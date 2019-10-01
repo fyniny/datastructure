@@ -23,10 +23,12 @@ func TestVector(t *testing.T) {
 		new(int),
 	)
 
-	vec.elem = append(vec.elem, ptr(1))
-	vec.len = 1
-
 	Convey("test vec linear vec: get", t, func() {
+		Convey("insert the first node", func() {
+			err := vec.Insert(1, ptr(1))
+			So(err, ShouldEqual, nil)
+		})
+
 		Convey("test get succeed", func() {
 			res := vec.GetElem(1).(*int)
 			So(*res, ShouldEqual, 1)
@@ -35,6 +37,11 @@ func TestVector(t *testing.T) {
 		Convey("test get failed", func() {
 			res := vec.GetElem(2)
 			So(res, ShouldEqual, nil)
+		})
+
+		Convey("test insert at the end", func() {
+			So(vec.Insert(vec.Length()+1, ptr(24)), ShouldEqual, nil)
+			So(*vec.GetElem(vec.Length()).(*int), ShouldEqual, 24)
 		})
 	})
 
@@ -47,7 +54,7 @@ func TestVector(t *testing.T) {
 		})
 
 		Convey("test insert failed by out of range", func() {
-			err := vec.Insert(4, ptr(4))
+			err := vec.Insert(vec.Length()+2, ptr(4))
 			So(err, ShouldNotBeNil)
 			t.Log(err)
 		})

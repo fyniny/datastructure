@@ -76,13 +76,13 @@ func (l *list) LocateElem(elem interface{}) int {
 		if comparer(loop.next.elem, elem) == 0 {
 			return ret
 		}
+		loop = loop.next
 	}
 	return 0
 }
 
 func (l *list) Insert(i int, elem interface{}) error {
-	j := 0
-	if i > l.len || i <= 0 {
+	if i-1 > l.len || i <= 0 {
 		return fmt.Errorf("insert position out of range")
 	}
 
@@ -91,12 +91,12 @@ func (l *list) Insert(i int, elem interface{}) error {
 	}
 
 	loop := l.head
-	for loop.next != nil {
-		j++
-		if i == j {
+	for loop != nil {
+		i--
+		if i == 0 {
 			tmp := &node{
 				elem: elem,
-				next: loop.next.next,
+				next: loop.next,
 			}
 			loop.next = tmp
 			break

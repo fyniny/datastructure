@@ -19,6 +19,7 @@ func (v *vector) Init(comparer func(inode1, inode2 interface{}) int, typ interfa
 		v.init = true
 		v.typ = reflect.TypeOf(typ)
 		v.len = 0
+		v.elem=make([]interface{}, 0)
 		v.compare = comparer
 	}
 }
@@ -62,7 +63,7 @@ func (v *vector) LocateElem(elem interface{}) int {
 }
 
 func (v *vector) Insert(i int, elem interface{}) error {
-	if i > v.len || i <= 0 {
+	if i-1 > v.len || i <= 0 {
 		return fmt.Errorf("insert position out of range")
 	}
 
@@ -70,9 +71,13 @@ func (v *vector) Insert(i int, elem interface{}) error {
 		return fmt.Errorf("list only accept type: %s, receive unmatch type: %s", v.typ.String(), reflect.TypeOf(elem).String())
 	}
 
+	v.len++
+	if i == v.len {
+		v.elem = append(v.elem, elem)
+		return nil
+	}
 	v.elem = append(v.elem[0: i], v.elem[i-1:]...)
 	v.elem[i-1]=elem
-	v.len++
 	return nil
 }
 
