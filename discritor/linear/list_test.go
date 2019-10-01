@@ -23,21 +23,25 @@ func TestList(t *testing.T) {
 		new(int),
 	)
 
-	list.head.next =  &node{
-		elem: ptr(1),
-		next: nil,
-	}
-
-	list.len = 1
 
 	Convey("test list linear list: get", t, func() {
+		err := list.Insert(1, ptr(2))
+		So(err, ShouldEqual, nil)
+
 		Convey("test get succeed", func() {
 			res := list.GetElem(1).(*int)
-			So(*res, ShouldEqual, 1)
+			So(*res, ShouldEqual, 2)
+		})
+
+		Convey("test get final", func() {
+			err := list.Insert(list.Length()+1, ptr(12))
+			So(err, ShouldEqual, nil)
+			res := list.GetElem(list.Length())
+			So(*res.(*int), ShouldEqual,12 )
 		})
 
 		Convey("test get failed", func() {
-			res := list.GetElem(2)
+			res := list.GetElem(list.Length()+1)
 			So(res, ShouldEqual, nil)
 		})
 	})
@@ -48,10 +52,12 @@ func TestList(t *testing.T) {
 			So(err, ShouldEqual, nil)
 			item := list.GetElem(1)
 			So(*item.(*int), ShouldEqual, 3)
+			err = list.Insert(list.Length(), ptr(12))
+			So(err, ShouldEqual, nil)
 		})
 
 		Convey("test insert failed by out of range", func() {
-			err := list.Insert(4, ptr(4))
+			err := list.Insert(list.Length()+2, ptr(4))
 			So(err, ShouldNotBeNil)
 			t.Log(err)
 		})
@@ -72,5 +78,6 @@ func TestList(t *testing.T) {
 		So(*item.(*int), ShouldEqual, 3)
 		So(list.LocateElem(item), ShouldEqual, 0)
 	})
+
 	t.Log(fmt.Sprintf("%+v", list))
 }
