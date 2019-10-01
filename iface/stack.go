@@ -22,6 +22,9 @@ type Stack interface {
 	// Top 返回栈顶元素
 	Top() interface{}
 
+	// Push 将元素压栈
+	Push(elem interface{})
+
 	// Pop 弹出栈顶元素
 	Pop() interface{}
 
