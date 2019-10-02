@@ -1,6 +1,7 @@
 package queue
 
 import (
+	"fmt"
 	"github.com/fyniny/datastruct/iface"
 )
 
@@ -38,13 +39,11 @@ func (ql *queueLinear) Head() interface{} {
 	return nil
 }
 
-func (ql *queueLinear) Push(elem interface{}) {
+func (ql *queueLinear) Push(elem interface{}) error {
 	if ql.init {
-		err := ql.linear.Insert(ql.linear.Length()+1, elem)
-		if err != nil {
-			panic(err)
-		}
+		return ql.linear.Insert(ql.linear.Length()+1, elem)
 	}
+	return fmt.Errorf("push into uninitialized queue")
 }
 
 func (ql *queueLinear) Delete() interface{} {

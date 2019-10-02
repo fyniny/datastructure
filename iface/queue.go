@@ -16,7 +16,7 @@ type Queue interface {
 	Head() interface{}
 
 	// Push 插入队列元素
-	Push(elem interface{})
+	Push(elem interface{}) error
 
 	// Pop 弹出队头元素
 	Delete() interface{}
