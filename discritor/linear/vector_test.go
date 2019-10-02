@@ -82,6 +82,8 @@ func TestVector(t *testing.T) {
 		}
 		_ = vec.Insert(vec.Length()+1, ptr(99))
 		So(*vec.GetElem(vec.Length()).(*int), ShouldEqual, 99)
+
+		So(*vec.Delete(vec.Length()).(*int), ShouldEqual, 99)
 	})
 
 	t.Log(fmt.Sprintf("%+v", vec))

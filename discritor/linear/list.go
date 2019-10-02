@@ -108,7 +108,7 @@ func (l *list) Insert(i int, elem interface{}) error {
 }
 
 func (l *list) Delete(i int) interface{} {
-	if l.len <= i || i <= 0 {
+	if l.len < i || i <= 0 {
 		return nil
 	}
 	j := 0

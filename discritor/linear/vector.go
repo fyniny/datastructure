@@ -110,7 +110,7 @@ func (v *vector) Insert(i int, elem interface{}) error {
 }
 
 func (v *vector) Delete(i int) interface{} {
-	if v.len <= i || i <= 0 {
+	if v.len < i || i <= 0 {
 		return nil
 	}
 
