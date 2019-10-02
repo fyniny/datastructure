@@ -36,7 +36,7 @@ func (sl *stackLinear) Top() interface{} {
 		return nil
 	}
 
-	return sl.list.GetElem(1)
+	return sl.list.GetElem(sl.list.Length())
 }
 
 func (sl *stackLinear) Push(elem interface{}) {

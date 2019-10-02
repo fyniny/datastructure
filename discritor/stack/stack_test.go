@@ -17,7 +17,7 @@ func TestStack(t *testing.T) {
 		}
 		ptr := func(i int) *int {return &i}
 
-		sta := New(linear.Vector(comparer, new(int)))
+		sta := New(linear.List(comparer, new(int)))
 
 		Convey("push stack", func() {
 			sta.Push(ptr(1))
