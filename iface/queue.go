@@ -18,7 +18,7 @@ type Queue interface {
 	// Push 插入队列元素
 	Push(elem interface{}) error
 
-	// Pop 弹出队头元素
+	// Delete 队头元素出队
 	Delete() interface{}
 
 	// Length 返回队长度
