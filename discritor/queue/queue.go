@@ -2,6 +2,7 @@ package queue
 
 import (
 	"fmt"
+
 	"github.com/fyniny/datastruct/iface"
 )
 
