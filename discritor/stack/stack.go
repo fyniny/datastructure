@@ -36,7 +36,7 @@ func (sl *stackLinear) Top() interface{} {
 		return nil
 	}
 
-	return sl.list.GetElem(1)
+	return sl.list.GetElem(sl.list.Length())
 }
 
 func (sl *stackLinear) Push(elem interface{}) {
@@ -44,7 +44,7 @@ func (sl *stackLinear) Push(elem interface{}) {
 		panic("stack uninitialized")
 	}
 
-	err := sl.list.Insert(1, elem)
+	err := sl.list.Insert(sl.list.Length()+1, elem)
 	if err != nil {
 		panic(err)
 	}
@@ -55,7 +55,7 @@ func (sl *stackLinear) Pop() interface{} {
 		panic("stack uninitialized or empty")
 	}
 
-	return sl.list.Delete(1)
+	return sl.list.Delete(sl.list.Length())
 }
 
 func (sl *stackLinear) Length() int {
