@@ -1,10 +1,12 @@
 package stack
 
 import (
-	"github.com/fyniny/datastruct/discritor/linear"
 	"testing"
 
 	. "github.com/smartystreets/goconvey/convey"
+
+	"github.com/fyniny/datastruct/discritor/linear"
+
 )
 
 func TestStack(t *testing.T) {
